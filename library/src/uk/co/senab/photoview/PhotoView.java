@@ -109,7 +109,9 @@ public class PhotoView extends ImageView implements IPhotoView {
 	// setImageBitmap calls through to this method
 	public void setImageDrawable(Drawable drawable) {
 		super.setImageDrawable(drawable);
-		if (null != mAttacher) {
+		
+		// TODO: Added by Martin Rajniak: Do not update when drawable is null (I am using it when onDestroy method is called on fragment displaying the view, so this has no meaning)
+		if (null != mAttacher && drawable != null) {
 			mAttacher.update();
 		}
 	}
